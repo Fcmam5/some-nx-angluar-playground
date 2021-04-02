@@ -1,0 +1,150 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "pocasses-fe",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "pocasses-fe": {
+      "projectType": "application",
+      "root": "apps/pocasses-fe",
+      "sourceRoot": "apps/pocasses-fe/src",
+      "prefix": "pocasses",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/pocasses-fe",
+            "index": "apps/pocasses-fe/src/index.html",
+            "main": "apps/pocasses-fe/src/main.ts",
+            "polyfills": "apps/pocasses-fe/src/polyfills.ts",
+            "tsConfig": "apps/pocasses-fe/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "apps/pocasses-fe/src/favicon.ico",
+              "apps/pocasses-fe/src/assets"
+            ],
+            "styles": ["apps/pocasses-fe/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/pocasses-fe/src/environments/environment.ts",
+                  "with": "apps/pocasses-fe/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "pocasses-fe:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "pocasses-fe:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "pocasses-fe:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/pocasses-fe/src/**/*.ts",
+              "apps/pocasses-fe/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/pocasses-fe"],
+          "options": {
+            "jestConfig": "apps/pocasses-fe/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "pocasses-fe-e2e": {
+      "root": "apps/pocasses-fe-e2e",
+      "sourceRoot": "apps/pocasses-fe-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/pocasses-fe-e2e/cypress.json",
+            "tsConfig": "apps/pocasses-fe-e2e/tsconfig.e2e.json",
+            "devServerTarget": "pocasses-fe:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "pocasses-fe:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/pocasses-fe-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
