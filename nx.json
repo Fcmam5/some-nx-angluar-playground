@@ -1,34 +1,23 @@
 {
   "implicitDependencies": {
     "angular.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
+    "package.json": { "dependencies": "*", "devDependencies": "*" },
     "tsconfig.base.json": "*",
     "tslint.json": "*",
     ".eslintrc.json": "*",
     "nx.json": "*"
   },
-  "affected": {
-    "defaultBase": "master"
-  },
+  "affected": { "defaultBase": "master" },
   "npmScope": "pocasses",
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
     }
   },
   "projects": {
-    "pocasses-fe": {
-      "tags": []
-    },
-    "pocasses-fe-e2e": {
-      "tags": [],
-      "implicitDependencies": ["pocasses-fe"]
-    }
+    "pocasses-fe": { "tags": [] },
+    "pocasses-fe-e2e": { "tags": [], "implicitDependencies": ["pocasses-fe"] },
+    "ui": { "tags": [] }
   }
 }

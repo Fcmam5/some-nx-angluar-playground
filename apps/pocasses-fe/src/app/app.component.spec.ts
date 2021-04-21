@@ -1,9 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+import { UiModule } from '@pocasses/ui';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [UiModule],
       declarations: [AppComponent],
     }).compileComponents();
   });
