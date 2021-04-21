@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'pocasses-root',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pocasses-fe';
+  constructor(private translocoService: TranslocoService) { }
+
+  change(lang: string) {
+    this.translocoService.setActiveLang(lang);
+  }
 }
